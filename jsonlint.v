@@ -1,0 +1,122 @@
+import os
+import prantlf.cargs
+import prantlf.json { JsonError, ParseOpts, StringifyOpts, parse, stringify }
+
+const version = '0.0.1'
+
+const usage = 'JSON/JSONC validator and pretty-printer.
+
+Usage: jsonlint [options] [<file> ...]
+
+  <file>                read the JSON/JSONC input from a file
+
+Options:
+  -o|--output <file>    write the JSON output to a file
+	-m|--mode <mode>      parse in the mode "json" or "jsonc"
+  -w|--overwrite        overwrite the input file with the formatted output
+  -k|--check            check the syntax only, no output
+  -a|--compact          print error messages on a single line
+	-t|--trailing-commas  insert trailing commas to arrays and objects
+  -l|--line-break       append a line break to the JSON output
+  -p|--pretty           prints the JSON output with line breaks and indented
+  -V|--version          prints the version of the executable and exits
+  -h|--help             prints th usage information and exits
+
+If no input file is specified, it will be read from standard input.
+If multiple files are specified and file overwriting is not enabled,
+the files will be only checked and their names printed out.
+
+Examples:
+  $ jsonlint config.json -lpw
+  $ cat config.json | jsonlint > config2.json'
+
+enum Mode {
+	json
+	jsonc
+}
+
+struct Opts {
+mut:
+	output          string
+	mode            Mode
+	overwrite       bool
+	check           bool
+	compact         bool
+	trailing_commas bool
+	line_break      bool
+	pretty          bool
+}
+
+fn check_one(file string, names_only bool, opts &Opts) ! {
+	input := if file.len > 0 {
+		os.read_file(file)!
+	} else {
+		os.get_raw_lines_joined()
+	}
+
+	src := parse(input, ParseOpts{
+		ignore_comments: opts.mode == Mode.jsonc
+		ignore_trailing_commas: opts.mode == Mode.jsonc
+	}) or {
+		if err is JsonError {
+			if file.len > 0 {
+				msg := if opts.compact {
+					err.reason
+				} else {
+					err.msg_full()
+				}
+				eprintln('${file}:${err.line}:${err.column}: ${msg}')
+				return
+			}
+			msg := if opts.compact {
+				err.msg()
+			} else {
+				err.msg_full()
+			}
+			eprintln(msg)
+			return
+		}
+		eprintln('${file}: ${err.msg()}')
+		return
+	}
+
+	mut dst := stringify(src, StringifyOpts{
+		pretty: opts.pretty
+		trailing_commas: opts.trailing_commas
+	})
+
+	if !opts.check {
+		if opts.line_break {
+			dst += '\n'
+		}
+		if opts.output.len > 0 {
+			os.write_file(opts.output, dst)!
+		} else if opts.overwrite && file.len > 0 {
+			os.write_file(file, dst)!
+		} else if names_only {
+			println('${file}: OK')
+		} else {
+			print(dst)
+		}
+	}
+}
+
+fn check() ! {
+	opts, args := cargs.parse[Opts](usage, cargs.Input{ version: version })!
+
+	if args.len > 0 {
+		names_only := args.len > 1 && !opts.overwrite
+		for arg in args {
+			check_one(arg, names_only, &opts)!
+		}
+	} else {
+		check_one('', false, &opts)!
+	}
+}
+
+fn main() {
+	check() or {
+		eprintln(err.msg())
+		exit(1)
+	}
+}
