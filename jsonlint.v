@@ -18,6 +18,8 @@ Options:
   -a|--compact          print error messages on a single line
 	-t|--trailing-commas  insert trailing commas to arrays and objects
 	-s|--single-quotes    format single-quoted instead of double-quoted strings
+	--escape-slashes      escape slashes by by prefixing them with a backslash
+	--escape-unicode      escape multibyte Unicode characters with \\u literals
   -l|--line-break       append a line break to the JSON output
   -p|--pretty           prints the JSON output with line breaks and indented
   -V|--version          prints the version of the executable and exits
@@ -46,6 +48,8 @@ mut:
 	compact         bool
 	trailing_commas bool
 	single_quotes   bool
+	escape_slashes  bool
+	escape_unicode  bool
 	line_break      bool
 	pretty          bool
 }
@@ -90,6 +94,8 @@ fn check_one(file string, names_only bool, opts &Opts) ! {
 		pretty: opts.pretty
 		trailing_commas: opts.trailing_commas
 		single_quotes: opts.single_quotes
+		escape_slashes: opts.escape_slashes
+		escape_unicode: opts.escape_unicode
 	})
 
 	if !opts.check {
