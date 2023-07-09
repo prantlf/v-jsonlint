@@ -1,5 +1,11 @@
 # Changes
 
+## [0.0.3](https://github.com/prantlf/v-jsonlint/compare/v0.0.2...v0.0.3) (2023-07-09)
+
+### Features
+
+* Allow to control escaping slashes and unicode characters ([bf6597b](https://github.com/prantlf/v-jsonlint/commit/bf6597b31f23bd40529b0f8ce36d89fb89f46c54))
+
 ## [0.0.2](https://github.com/prantlf/v-jsonlint/compare/v0.0.1...v0.0.2) (2023-07-09)
 
 ### Features
