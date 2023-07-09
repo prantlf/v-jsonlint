@@ -4,19 +4,20 @@ import prantlf.json { JsonError, ParseOpts, StringifyOpts, parse, stringify }
 
 const version = '0.0.1'
 
-const usage = 'JSON/JSONC validator and pretty-printer.
+const usage = 'JSON/JSONC/JSON5 validator and pretty-printer.
 
 Usage: jsonlint [options] [<file> ...]
 
-  <file>                read the JSON/JSONC input from a file
+  <file>                read the JSON/JSONC/JSON5 input from a file
 
 Options:
   -o|--output <file>    write the JSON output to a file
-	-m|--mode <mode>      parse in the mode "json" or "jsonc"
+	-m|--mode <mode>      parse in the mode "json", "jsonc", or "json5"
   -w|--overwrite        overwrite the input file with the formatted output
   -k|--check            check the syntax only, no output
   -a|--compact          print error messages on a single line
 	-t|--trailing-commas  insert trailing commas to arrays and objects
+	-s|--single-quotes    format single-quoted instead of double-quoted strings
   -l|--line-break       append a line break to the JSON output
   -p|--pretty           prints the JSON output with line breaks and indented
   -V|--version          prints the version of the executable and exits
@@ -33,6 +34,7 @@ Examples:
 enum Mode {
 	json
 	jsonc
+	json5
 }
 
 struct Opts {
@@ -43,6 +45,7 @@ mut:
 	check           bool
 	compact         bool
 	trailing_commas bool
+	single_quotes   bool
 	line_break      bool
 	pretty          bool
 }
@@ -54,9 +57,12 @@ fn check_one(file string, names_only bool, opts &Opts) ! {
 		os.get_raw_lines_joined()
 	}
 
+	jsonc := opts.mode == Mode.jsonc
+	json5 := opts.mode == Mode.json5
 	src := parse(input, ParseOpts{
-		ignore_comments: opts.mode == Mode.jsonc
-		ignore_trailing_commas: opts.mode == Mode.jsonc
+		ignore_comments: jsonc || json5
+		ignore_trailing_commas: jsonc || json5
+		allow_single_quotes: json5
 	}) or {
 		if err is JsonError {
 			if file.len > 0 {
@@ -83,6 +89,7 @@ fn check_one(file string, names_only bool, opts &Opts) ! {
 	mut dst := stringify(src, StringifyOpts{
 		pretty: opts.pretty
 		trailing_commas: opts.trailing_commas
+		single_quotes: opts.single_quotes
 	})
 
 	if !opts.check {

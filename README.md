@@ -1,10 +1,11 @@
 # jsonlint
 
-[JSON]/[JSONC] validator and pretty-printer.
+[JSON]/[JSONC]/[JSON5] validator and pretty-printer.
 
 * Uses a [fast] recursive descent parser written in V.
 * Shows detailed [error messages](#errors) with location context.
 * Optionally supports [JSONC] - ignores single-line and multi-line JavaScript-style comments treating them as whitespace and also trailing commas in arrays ans objects.
+* Partially supports [JSON5] - allows single-quoted strings. (JSON5 is work in progress.)
 * Offers both condensed and prettified [JSON] output.
 
 Uses [prantlf.json].
@@ -32,6 +33,7 @@ Check a file read from standard input and print it formatted to standard output,
       -k|--check            check the syntax only, no output
       -a|--compact          print error messages on a single line
       -t|--trailing-commas  insert trailing commas to arrays and objects
+      -s|--single-quotes    format single-quoted instead of double-quoted strings
       -l|--line-break       append a line break to the JSON output
       -p|--pretty           prints the JSON output with line breaks and indented
       -V|--version          prints the version of the executable and exits
@@ -75,8 +77,15 @@ Fixing the errors by enabling [JSONC]:
     v vet .
     npx conventional-changelog-cli -p angular -i CHANGELOG.md -s
 
+## TODO
+
+This is a work in progress.
+
+* Finish the [JSON5] support.
+
 [prantlf.json]: https://github.com/prantlf/v-json
 [JSON]: https://www.json.org/
 [JSONC]: https://changelog.com/news/jsonc-is-a-superset-of-json-which-supports-comments-6LwR
+[JSON5]: https://spec.json5.org/
 [fast]: https://github.com/prantlf/v-json#performance
 [error messages]: https://github.com/prantlf/v-json#errors
