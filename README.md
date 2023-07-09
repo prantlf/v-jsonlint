@@ -24,11 +24,11 @@ Check a file read from standard input and print it formatted to standard output,
 
     jsonlint [options] [<file> ...]
 
-      <file>                read the JSON/JSONC input from a file
+      <file>                read the JSON/JSONC/JSON5 input from a file
 
     Options:
       -o|--output <file>    write the JSON output to a file
-      -m|--mode <mode>      parse in the mode "json" or "jsonc"
+      -m|--mode <mode>      parse in the mode "json", "jsonc", or "json5"
       -w|--overwrite        overwrite the input file with the formatted output
       -k|--check            check the syntax only, no output
       -a|--compact          print error messages on a single line
