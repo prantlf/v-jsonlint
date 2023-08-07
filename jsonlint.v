@@ -120,10 +120,10 @@ fn check() ! {
 	if args.len > 0 {
 		names_only := args.len > 1 && !opts.overwrite
 		for arg in args {
-			check_one(arg, names_only, &opts)!
+			check_one(arg, names_only, opts)!
 		}
 	} else {
-		check_one('', false, &opts)!
+		check_one('', false, opts)!
 	}
 }
 
