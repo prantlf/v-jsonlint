@@ -1,5 +1,11 @@
 # Changes
 
+## [0.0.4](https://github.com/prantlf/v-jsonlint/compare/v0.0.3...v0.0.4) (2023-08-07)
+
+### Bug Fixes
+
+* Upgrade to the latest prantlf.cargs ([59e8562](https://github.com/prantlf/v-jsonlint/commit/59e85629ac7a99a5529915eab0e0c179116bcb93))
+
 ## [0.0.3](https://github.com/prantlf/v-jsonlint/compare/v0.0.2...v0.0.3) (2023-07-09)
 
 ### Features
