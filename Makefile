@@ -1,3 +1,7 @@
+ifeq (1,${RELEASE})
+	VFLAGS=-prod
+endif
+
 all: check build test
 
 check:
@@ -5,7 +9,7 @@ check:
 	v vet .
 
 build:
-	v jsonlint.v
+	v $(VFLAGS) jsonlint.v
 
 test:
 	./test.sh
