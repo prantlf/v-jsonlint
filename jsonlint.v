@@ -21,9 +21,9 @@ Options:
 	--escape-slashes      escape slashes by by prefixing them with a backslash
 	--escape-unicode      escape multibyte Unicode characters with \\u literals
   -l|--line-break       append a line break to the JSON output
-  -p|--pretty           prints the JSON output with line breaks and indented
-  -V|--version          prints the version of the executable and exits
-  -h|--help             prints th usage information and exits
+  -p|--pretty           print the JSON output with line breaks and indented
+  -V|--version          print the version of the executable and exit
+  -h|--help             print th usage information and exit
 
 If no input file is specified, it will be read from standard input.
 If multiple files are specified and file overwriting is not enabled,
