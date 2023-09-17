@@ -41,4 +41,4 @@ jobs:
     - name: Setup V
       uses: prantlf/setup-v-action@v1
     - name: Build
-      run: make check build RELEASE=1
+      run: cmd /c make.bat
