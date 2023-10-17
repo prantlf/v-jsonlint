@@ -22,6 +22,13 @@ jobs:
       uses: prantlf/setup-v-action@v1
     - name: Build and Test
       run: make RELEASE=1
+    - name: Pack
+      run: zip -9 jsonlint-linux-x64.zip jsonlint
+    - name: Save Cache
+      uses: actions/cache/save@v3
+      with:
+        path: jsonlint-linux-x64.zip
+        key: linux-${{ github.sha }}
 
   macos:
     runs-on: macos-latest
@@ -32,6 +39,13 @@ jobs:
       uses: prantlf/setup-v-action@v1
     - name: Build and Test
       run: make RELEASE=1
+    - name: Pack
+      run: zip -9 jsonlint-macos-x64.zip jsonlint
+    - name: Save Cache
+      uses: actions/cache/save@v3
+      with:
+        path: jsonlint-macos-x64.zip
+        key: macos-${{ github.sha }}
 
   windows:
     runs-on: windows-latest
@@ -42,3 +56,37 @@ jobs:
       uses: prantlf/setup-v-action@v1
     - name: Build
       run: cmd /c make.bat
+    - name: Pack
+      uses: vimtor/action-zip@v1
+      with:
+        files: jsonlint.exe
+        dest: jsonlint-windows-x64.zip
+    - name: Save Cache
+      uses: actions/cache/save@v3
+      with:
+        path: jsonlint-windows-x64.zip
+        key: windows-${{ github.sha }}
+
+  release:
+    needs:
+      - linux
+      - macos
+      - windows
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/cache/restore@v3
+      with:
+        path: jsonlint-linux-x64.zip
+        key: linux-${{ github.sha }}
+        fail-on-cache-miss: true
+    - uses: actions/cache/restore@v3
+      with:
+        path: jsonlint-macos-x64.zip
+        key: macos-${{ github.sha }}
+        fail-on-cache-miss: true
+    - uses: actions/cache/restore@v3
+      with:
+        path: jsonlint-windows-x64.zip
+        key: windows-${{ github.sha }}
+        fail-on-cache-miss: true
