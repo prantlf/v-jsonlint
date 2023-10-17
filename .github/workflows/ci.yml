@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout Sources
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
     - name: Setup V
       uses: prantlf/setup-v-action@v1
     - name: Build and Test
@@ -34,7 +34,7 @@ jobs:
     runs-on: macos-latest
     steps:
     - name: Checkout Sources
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
     - name: Setup V
       uses: prantlf/setup-v-action@v1
     - name: Build and Test
@@ -51,7 +51,7 @@ jobs:
     runs-on: windows-latest
     steps:
     - name: Checkout Sources
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
     - name: Setup V
       uses: prantlf/setup-v-action@v1
     - name: Build
@@ -74,7 +74,7 @@ jobs:
       - windows
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - uses: actions/cache/restore@v3
       with:
         path: jsonlint-linux-x64.zip
@@ -90,3 +90,8 @@ jobs:
         path: jsonlint-windows-x64.zip
         key: windows-${{ github.sha }}
         fail-on-cache-miss: true
+    - name: Archive artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: binaries
+        path: *.zip
