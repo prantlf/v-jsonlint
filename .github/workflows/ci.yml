@@ -16,19 +16,14 @@ jobs:
   linux:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout Sources
+    - name: Checkout sources
       uses: actions/checkout@v4
     - name: Setup V
       uses: prantlf/setup-v-action@v1
-    - name: Build and Test
+    - name: Build and test
       run: make RELEASE=1
-    - name: Pack
-      run: zip -9 jsonlint-linux-x64.zip jsonlint
-    - name: Save Cache
-      uses: actions/cache/save@v3
-      with:
-        path: jsonlint-linux-x64.zip
-        key: linux-${{ github.sha }}
+    - name: Shelve output
+      uses: prantlf/shelve-output-action@v1
 
   macos:
     runs-on: macos-latest
@@ -37,35 +32,22 @@ jobs:
       uses: actions/checkout@v4
     - name: Setup V
       uses: prantlf/setup-v-action@v1
-    - name: Build and Test
+    - name: Build and test
       run: make RELEASE=1
-    - name: Pack
-      run: zip -9 jsonlint-macos-x64.zip jsonlint
-    - name: Save Cache
-      uses: actions/cache/save@v3
-      with:
-        path: jsonlint-macos-x64.zip
-        key: macos-${{ github.sha }}
+    - name: Shelve output
+      uses: prantlf/shelve-output-action@v1
 
   windows:
     runs-on: windows-latest
     steps:
-    - name: Checkout Sources
+    - name: Checkout sources
       uses: actions/checkout@v4
     - name: Setup V
       uses: prantlf/setup-v-action@v1
     - name: Build
       run: cmd /c make.bat
-    - name: Pack
-      uses: vimtor/action-zip@v1
-      with:
-        files: jsonlint.exe
-        dest: jsonlint-windows-x64.zip
-    - name: Save Cache
-      uses: actions/cache/save@v3
-      with:
-        path: jsonlint-windows-x64.zip
-        key: windows-${{ github.sha }}
+    - name: Shelve output
+      uses: prantlf/shelve-output-action@v1
 
   release:
     needs:
@@ -74,22 +56,12 @@ jobs:
       - windows
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/cache/restore@v3
-      with:
-        path: jsonlint-linux-x64.zip
-        key: linux-${{ github.sha }}
-        fail-on-cache-miss: true
-    - uses: actions/cache/restore@v3
-      with:
-        path: jsonlint-macos-x64.zip
-        key: macos-${{ github.sha }}
-        fail-on-cache-miss: true
-    - uses: actions/cache/restore@v3
-      with:
-        path: jsonlint-windows-x64.zip
-        key: windows-${{ github.sha }}
-        fail-on-cache-miss: true
+    - name: Checkout sources
+      uses: actions/checkout@v4
+    - name: Unshelve output
+      uses: prantlf/unshelve-output-action@v1
+    - name: Discard shelf
+      uses: prantlf/discard-shelf-action@v1
     - name: Archive artifacts
       uses: actions/upload-artifact@v3
       with:
