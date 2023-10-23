@@ -80,16 +80,18 @@ jobs:
     - name: Checkout sources
       uses: actions/checkout@v4
     - name: Unshelve changes
+      uses: prantlf/unshelve-changes-action@v1
       with:
         files: ${{ needs.linux.outputs.changed-files }}
-      uses: prantlf/unshelve-changes-action@v1
+        discard-shelf: false
     - name: Unshelve output
       uses: prantlf/unshelve-output-action@v1
-    - name: Archive artifacts
-      uses: actions/upload-artifact@v3
       with:
-        name: binaries
-        path: '*.zip'
+        discard-shelf: false
+    - name: Publish release
+      uses: prantlf/finish-release-action@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   clear:
     if: ${{ github.ref_name == 'master' && needs.linux.outputs.changed != 'true' }}
@@ -99,7 +101,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Discard shelved output
-      uses: prantlf/discard-output-action@v3
+      uses: prantlf/discard-shelf-action@v3
       with:
         include-linux: false
         include-macos: false
