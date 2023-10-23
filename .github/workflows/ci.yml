@@ -31,7 +31,7 @@ jobs:
     - name: Build and test
       run: make RELEASE=1
     - name: Shelve output
-      uses: prantlf/shelve-output-action@v1
+      uses: prantlf/shelve-output-action@v2
       with:
         enable: ${{ steps.bump.outputs.bumped }}
 
@@ -48,7 +48,7 @@ jobs:
     - name: Build and test
       run: make RELEASE=1
     - name: Shelve output
-      uses: prantlf/shelve-output-action@v1
+      uses: prantlf/shelve-output-action@v2
       with:
         enable: ${{ steps.bump.outputs.bumped }}
 
@@ -65,7 +65,7 @@ jobs:
     - name: Build
       run: cmd /c make.bat
     - name: Shelve output
-      uses: prantlf/shelve-output-action@v1
+      uses: prantlf/shelve-output-action@v2
       # with:
       #   enable: ${{ steps.bump.outputs.bumped }}
 
@@ -83,11 +83,8 @@ jobs:
       uses: prantlf/unshelve-changes-action@v1
       with:
         files: ${{ needs.linux.outputs.changed-files }}
-        discard-shelf: false
     - name: Unshelve output
-      uses: prantlf/unshelve-output-action@v1
-      with:
-        discard-shelf: false
+      uses: prantlf/unshelve-output-action@v3
     - name: Publish release
       uses: prantlf/finish-release-action@v1
       env:
