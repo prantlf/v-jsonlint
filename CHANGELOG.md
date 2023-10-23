@@ -1,5 +1,11 @@
 # Changes
 
+## [0.0.5](https://github.com/prantlf/v-jsonlint/compare/v0.0.4...v0.0.5) (2023-10-23)
+
+### Bug Fixes
+
+* Update the imprinted version number ([b623809](https://github.com/prantlf/v-jsonlint/commit/b62380929d7c34eb6c7a90a2ae150c340a359d42))
+
 ## [0.0.4](https://github.com/prantlf/v-jsonlint/compare/v0.0.3...v0.0.4) (2023-08-07)
 
 ### Bug Fixes
