@@ -1,5 +1,11 @@
 # Changes
 
+## [0.0.6](https://github.com/prantlf/v-jsonlint/compare/v0.0.5...v0.0.6) (2023-10-24)
+
+### Bug Fixes
+
+* Build with updated dependencies ([2d78fb0](https://github.com/prantlf/v-jsonlint/commit/2d78fb08d715b158ec857b9a5cd13e02841e4671))
+
 ## [0.0.5](https://github.com/prantlf/v-jsonlint/compare/v0.0.4...v0.0.5) (2023-10-23)
 
 ### Bug Fixes

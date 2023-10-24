@@ -1,7 +1,7 @@
 Module {
 	name: 'jsonlint'
 	description: 'JSON/JSONC/JSON5 validator and pretty-printer.'
-	version: '0.0.5'
+	version: '0.0.6'
 	license: 'MIT'
 	dependencies: ['prantlf.cargs', 'prantlf.json']
 }

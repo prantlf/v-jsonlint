@@ -2,7 +2,7 @@ import os
 import prantlf.cargs
 import prantlf.json { JsonError, ParseOpts, StringifyOpts, parse, stringify }
 
-const version = '0.0.4'
+const version = '0.0.6'
 
 const usage = 'JSON/JSONC/JSON5 validator and pretty-printer.
 
