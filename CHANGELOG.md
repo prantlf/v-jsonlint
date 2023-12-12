@@ -1,5 +1,11 @@
 # Changes
 
+## [0.1.0](https://github.com/prantlf/v-jsonlint/compare/v0.0.6...v0.1.0) (2023-12-12)
+
+### Features
+
+* Add arm64 build, cross-compile for Windows ([6d83f3c](https://github.com/prantlf/v-jsonlint/commit/6d83f3c5bddeceec3337bcf4913103fffb174429))
+
 ## [0.0.6](https://github.com/prantlf/v-jsonlint/compare/v0.0.5...v0.0.6) (2023-10-24)
 
 ### Bug Fixes
