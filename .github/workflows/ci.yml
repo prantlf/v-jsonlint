@@ -57,11 +57,18 @@ jobs:
     - name: Shelve output
       if: ${{ needs.linux.outputs.changed == 'true' }}
       uses: prantlf/shelve-output-action@v2
+    - name: Build ARM
+      run: make build RELEASE=1 ARM=1
+    - name: Shelve output
+      if: ${{ needs.linux.outputs.changed == 'true' }}
+      uses: prantlf/shelve-output-action@v2
+      with:
+        arch: arm64
 
   windows:
     needs:
       - linux
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
     - name: Checkout Sources
       uses: actions/checkout@v4
@@ -73,11 +80,36 @@ jobs:
       with:
         files: ${{ needs.linux.outputs.changed-files }}
         discard-shelf: false
-    - name: Build
-      run: cmd /c make.bat
+    - name: Install Cross-Compiler
+      run: sudo apt-get install gcc-mingw-w64-x86-64
+    - name: Build Windows
+      run: make build RELEASE=1 WINDOWS=1
     - name: Shelve output
       if: ${{ needs.linux.outputs.changed == 'true' }}
       uses: prantlf/shelve-output-action@v2
+      with:
+        os: windows
+
+  # windows:
+  #   needs:
+  #     - linux
+  #   runs-on: windows-latest
+  #   steps:
+  #   - name: Checkout Sources
+  #     uses: actions/checkout@v4
+  #   - name: Setup V
+  #     uses: prantlf/setup-v-action@v2
+  #   - name: Unshelve changes
+  #     if: ${{ needs.linux.outputs.changed == 'true' }}
+  #     uses: prantlf/unshelve-changes-action@v1
+  #     with:
+  #       files: ${{ needs.linux.outputs.changed-files }}
+  #       discard-shelf: false
+  #   - name: Build
+  #     run: cmd /c make.bat
+  #   - name: Shelve output
+  #     if: ${{ needs.linux.outputs.changed == 'true' }}
+  #     uses: prantlf/shelve-output-action@v2
 
   release:
     if: ${{ github.ref_name == 'master' && needs.linux.outputs.changed == 'true' }}
