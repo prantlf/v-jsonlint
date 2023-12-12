@@ -126,7 +126,7 @@ jobs:
       with:
         files: ${{ needs.linux.outputs.changed-files }}
     - name: Unshelve output
-      uses: prantlf/unshelve-output-action@v3
+      uses: prantlf/unshelve-output-action@v4
     - name: Publish release
       uses: prantlf/finish-release-action@v1
       env:
