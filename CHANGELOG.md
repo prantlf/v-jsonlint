@@ -1,5 +1,11 @@
 # Changes
 
+## [0.2.0](https://github.com/prantlf/v-jsonlint/compare/v0.1.0...v0.2.0) (2023-12-14)
+
+### Features
+
+* Add the linux arm64 support ([04a6011](https://github.com/prantlf/v-jsonlint/commit/04a60118d6761659bc392131cf71887c88abb985))
+
 ## [0.1.0](https://github.com/prantlf/v-jsonlint/compare/v0.0.6...v0.1.0) (2023-12-12)
 
 ### Features
