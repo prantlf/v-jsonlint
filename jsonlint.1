@@ -1,0 +1,95 @@
+.TH jsonlint "1" "December 15, 2023" "" "jsonlint manual"
+
+.SH NAME
+jsonlint - JSON/JSONC/JSON5 validator and pretty-printer
+
+.SH SYNOPSIS
+.B jsonlint
+[-o|--output
+.I file
+] [-m|--mode
+.I
+mode
+] [-w|--overwrite]
+.br
+[-p|--pretty] [-k|--check] [-a|--compact] [-t|--trailing-commas]
+.br
+[-s|--single-quotes] [--escape-slashes] [--escape-unicode]
+.br
+[-l|--line-break] [-V|--version] [-h|--help]
+[
+.I [file ...]
+]
+.RE
+
+.SH DESCRIPTION
+.B
+jsonlint is a JSON/JSONC/JSON5 validator and pretty-printer.
+
+.SH ARGUMENTS
+.B
+.IP "file"
+read the JSON/JSONC/JSON5 input from a file
+
+.SH OPTIONS
+.B
+.IP "-o|--output file"
+write the JSON output to a file
+.B
+.IP "-m|--mode mode"
+parse in the mode "json", "jsonc", or "json5"
+.B
+.IP "-w|--overwrite"
+overwrite the input file with the formatted output
+.B
+.IP "-k|--check"
+check the syntax only, no output
+.B
+.IP "-a|--compact"
+print error messages on a single line
+.B
+.IP "-t|--trailing-commas"
+insert trailing commas to arrays and objects
+.B
+.IP "-s|--single-quotes"
+format single-quoted instead of double-quoted strings
+.B
+.IP "--escape-slashes"
+escape slashes by by prefixing them with a backslash
+.B
+.IP "--escape-unicode"
+escape multibyte Unicode characters with \u literals
+.B
+.IP "-l|--line-break"
+append a line break to the JSON output
+.B
+.IP "-p|--pretty"
+print the JSON output with line breaks and indented
+.B
+.IP "-V|--version"
+print the version of the executable and exit
+.B
+.IP "-h|--help"
+print the usage information and exit
+
+.RE
+If no input file is specified, it will be read from standard input.
+If multiple files are specified and file overwriting is not enabled,
+the files will be only checked and their names printed out.
+
+.SH EXAMPLES
+.B
+.IP "jsonlint config.json -lpw"
+Prettify a file and ensure a trailing line break.
+.B
+.IP "cat config.json | jsonlint > config2.json"
+Minify a file and write the result to a new file.
+
+.SH BUGS
+jsonlint's bug tracker is located at <https://github.com/prantlf/v-jsonlint/issues>
+
+.SH DOCUMENTATION
+See the website for documentation <https://github.com/prantlf/v-jsonlint#readme>
+
+.SH AUTHOR
+Currently maintained by Ferdinand Prantl <prantlf@gmail.com>

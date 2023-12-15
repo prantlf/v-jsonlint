@@ -23,7 +23,7 @@ Options:
   -l|--line-break       append a line break to the JSON output
   -p|--pretty           print the JSON output with line breaks and indented
   -V|--version          print the version of the executable and exit
-  -h|--help             print th usage information and exit
+  -h|--help             print the usage information and exit
 
 If no input file is specified, it will be read from standard input.
 If multiple files are specified and file overwriting is not enabled,
