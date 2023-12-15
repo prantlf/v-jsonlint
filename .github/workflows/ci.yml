@@ -33,9 +33,9 @@ jobs:
     - name: Build and Test
       run: make RELEASE=1
     - name: Shelve output
+      if: ${{ steps.bump.outputs.bumped == 'true' }}
       uses: prantlf/shelve-output-action@v2
       with:
-        enable: ${{ steps.bump.outputs.bumped }}
         extra: man
     - name: Install ARM Cross-Compiler
       run: |
@@ -44,9 +44,9 @@ jobs:
     - name: Build ARM
       run: make build RELEASE=1 LINUX_ARM=1
     - name: Shelve output
+      if: ${{ steps.bump.outputs.bumped == 'true' }}
       uses: prantlf/shelve-output-action@v2
       with:
-        enable: ${{ steps.bump.outputs.bumped }}
         arch: arm64
         extra: man
 
