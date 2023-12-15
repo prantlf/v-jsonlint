@@ -1,5 +1,11 @@
 # Changes
 
+## [0.3.0](https://github.com/prantlf/v-jsonlint/compare/v0.2.0...v0.3.0) (2023-12-15)
+
+### Features
+
+* Add the man file ([e97421b](https://github.com/prantlf/v-jsonlint/commit/e97421bfbd842498e490c508cb935c369bab6180))
+
 ## [0.2.0](https://github.com/prantlf/v-jsonlint/compare/v0.1.0...v0.2.0) (2023-12-14)
 
 ### Features
