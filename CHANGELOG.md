@@ -1,5 +1,11 @@
 # Changes
 
+## [0.3.1](https://github.com/prantlf/v-jsonlint/compare/v0.3.0...v0.3.1) (2023-12-15)
+
+### Bug Fixes
+
+* Include man pages in asset archives ([f6fc610](https://github.com/prantlf/v-jsonlint/commit/f6fc6102b733cfc62aa53888c9b4ab173ff36bc1))
+
 ## [0.3.0](https://github.com/prantlf/v-jsonlint/compare/v0.2.0...v0.3.0) (2023-12-15)
 
 ### Features
