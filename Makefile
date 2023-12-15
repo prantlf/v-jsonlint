@@ -18,7 +18,7 @@ check:
 	v vet .
 
 build:
-	v $(VFLAGS) jsonlint.v
+	v $(VFLAGS) -o jsonlint .
 
 test:
 	./test.sh

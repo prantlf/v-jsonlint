@@ -1,1 +1,1 @@
-v -prod jsonlint.v
+v -prod -o jsonlint .

@@ -27,7 +27,7 @@ jobs:
       id: bump
       uses: prantlf/bump-version-action@v2
       with:
-        bump-files: jsonlint.v
+        bump-files: src/jsonlint.v
     - name: Shelve changes
       uses: prantlf/shelve-changes-action@v1
     - name: Build and Test
@@ -36,6 +36,7 @@ jobs:
       uses: prantlf/shelve-output-action@v2
       with:
         enable: ${{ steps.bump.outputs.bumped }}
+        extra: man
     - name: Install ARM Cross-Compiler
       run: |
         sudo apt-get update
@@ -47,6 +48,7 @@ jobs:
       with:
         enable: ${{ steps.bump.outputs.bumped }}
         arch: arm64
+        extra: man
 
   macos:
     needs:
@@ -68,6 +70,8 @@ jobs:
     - name: Shelve output
       if: ${{ needs.linux.outputs.changed == 'true' }}
       uses: prantlf/shelve-output-action@v2
+      with:
+        extra: man
     - name: Build ARM
       run: make build RELEASE=1 MACOS_ARM=1
     - name: Shelve output
@@ -75,6 +79,7 @@ jobs:
       uses: prantlf/shelve-output-action@v2
       with:
         arch: arm64
+        extra: man
 
   windows:
     needs:
