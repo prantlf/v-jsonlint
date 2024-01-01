@@ -1,6 +1,6 @@
 import os
 import prantlf.cargs
-import prantlf.json { JsonError, ParseOpts, StringifyOpts, parse, stringify }
+import prantlf.json { JsonError, ParseOpts, StringifyOpts, parse_opt, stringify_opt }
 
 const version = '0.3.1'
 
@@ -63,7 +63,7 @@ fn check_one(file string, names_only bool, opts &Opts) ! {
 
 	jsonc := opts.mode == Mode.jsonc
 	json5 := opts.mode == Mode.json5
-	src := parse(input, ParseOpts{
+	src := parse_opt(input, &ParseOpts{
 		ignore_comments: jsonc || json5
 		ignore_trailing_commas: jsonc || json5
 		allow_single_quotes: json5
@@ -90,7 +90,7 @@ fn check_one(file string, names_only bool, opts &Opts) ! {
 		return
 	}
 
-	mut dst := stringify(src, StringifyOpts{
+	mut dst := stringify_opt(src, &StringifyOpts{
 		pretty: opts.pretty
 		trailing_commas: opts.trailing_commas
 		single_quotes: opts.single_quotes
