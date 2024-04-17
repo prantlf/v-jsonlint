@@ -1,5 +1,11 @@
 # Changes
 
+## [0.3.2](https://github.com/prantlf/v-jsonlint/compare/v0.3.1...v0.3.2) (2024-04-17)
+
+### Bug Fixes
+
+* Adapt to changes on interface of json and yaml packages ([d1a1650](https://github.com/prantlf/v-jsonlint/commit/d1a16502db839dc3d74773da477d3fbeec6de97d))
+
 ## [0.3.1](https://github.com/prantlf/v-jsonlint/compare/v0.3.0...v0.3.1) (2023-12-15)
 
 ### Bug Fixes
