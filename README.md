@@ -72,11 +72,15 @@ Fixing the errors by enabling [JSONC]:
     .vscode/settings.json: OK
     .vscode/tasks.json: OK
 
-## TODO
+## Contributing
 
-This is a work in progress.
+In lieu of a formal styleguide, take care to maintain the existing coding style. Lint and test your code.
 
-* Finish the [JSON5] support.
+## License
+
+Copyright (c) 2023-2024 Ferdinand Prantl
+
+Licensed under the MIT license.
 
 [prantlf.json]: https://github.com/prantlf/v-json
 [JSON]: https://www.json.org/
