@@ -64,9 +64,9 @@ fn check_one(file string, names_only bool, opts &Opts) ! {
 	jsonc := opts.mode == Mode.jsonc
 	json5 := opts.mode == Mode.json5
 	src := parse_opt(input, &ParseOpts{
-		ignore_comments: jsonc || json5
+		ignore_comments:        jsonc || json5
 		ignore_trailing_commas: jsonc || json5
-		allow_single_quotes: json5
+		allow_single_quotes:    json5
 	}) or {
 		if err is JsonError {
 			if file.len > 0 {
@@ -91,11 +91,11 @@ fn check_one(file string, names_only bool, opts &Opts) ! {
 	}
 
 	mut dst := stringify_opt(src, &StringifyOpts{
-		pretty: opts.pretty
+		pretty:          opts.pretty
 		trailing_commas: opts.trailing_commas
-		single_quotes: opts.single_quotes
-		escape_slashes: opts.escape_slashes
-		escape_unicode: opts.escape_unicode
+		single_quotes:   opts.single_quotes
+		escape_slashes:  opts.escape_slashes
+		escape_unicode:  opts.escape_unicode
 	})
 
 	if !opts.check {
