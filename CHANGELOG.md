@@ -1,5 +1,11 @@
 # Changes
 
+## [0.3.3](https://github.com/prantlf/v-jsonlint/compare/v0.3.2...v0.3.3) (2025-03-22)
+
+### Bug Fixes
+
+* Fix sources for the new V compiler ([763994c](https://github.com/prantlf/v-jsonlint/commit/763994cfbe4b52fdf80c78b5e606ffdc83fd6600))
+
 ## [0.3.2](https://github.com/prantlf/v-jsonlint/compare/v0.3.1...v0.3.2) (2024-04-17)
 
 ### Bug Fixes
