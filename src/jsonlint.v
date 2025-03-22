@@ -55,7 +55,7 @@ mut:
 }
 
 fn check_one(file string, names_only bool, opts &Opts) ! {
-	input := if file.len > 0 {
+	input := if file != '' {
 		os.read_file(file)!
 	} else {
 		os.get_raw_lines_joined()
@@ -69,7 +69,7 @@ fn check_one(file string, names_only bool, opts &Opts) ! {
 		allow_single_quotes:    json5
 	}) or {
 		if err is JsonError {
-			if file.len > 0 {
+			if file != '' {
 				msg := if opts.compact {
 					err.reason
 				} else {
@@ -102,9 +102,9 @@ fn check_one(file string, names_only bool, opts &Opts) ! {
 		if opts.line_break {
 			dst += '\n'
 		}
-		if opts.output.len > 0 {
+		if opts.output != '' {
 			os.write_file(opts.output, dst)!
-		} else if opts.overwrite && file.len > 0 {
+		} else if opts.overwrite && file != '' {
 			os.write_file(file, dst)!
 		} else if names_only {
 			println('${file}: OK')
