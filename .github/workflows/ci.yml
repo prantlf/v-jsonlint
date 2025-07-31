@@ -81,22 +81,17 @@ jobs:
   macos:
     needs:
       - linux
-    runs-on: macos-13
+    runs-on: macos-latest
     steps:
-    - name: Checkout Sources
-      uses: actions/checkout@v4
-    - name: Setup V
-      uses: prantlf/setup-v-action@v2
-    - name: Unshelve changes
-      if: ${{ needs.linux.outputs.changed == 'true' }}
+    - uses: actions/checkout@v4
+    - uses: prantlf/setup-v-action@v2
+    - if: ${{ needs.linux.outputs.changed == 'true' }}
       uses: prantlf/unshelve-changes-action@v2
       with:
         files: ${{ needs.linux.outputs.changed-files }}
         discard-shelf: false
-    - name: Build and Test
-      run: make RELEASE=1
-    - name: Shelve output
-      if: ${{ needs.linux.outputs.changed == 'true' }}
+    - run: make RELEASE=1
+    - if: ${{ needs.linux.outputs.changed == 'true' }}
       uses: prantlf/shelve-output-action@v3
       with:
         extra: man
@@ -105,7 +100,7 @@ jobs:
     if: ${{ github.ref_name == 'master' && needs.linux.outputs.changed == 'true' }}
     needs:
       - linux
-    runs-on: macos-13
+    runs-on: macos-latest
     steps:
     - uses: actions/checkout@v4
     - uses: prantlf/setup-v-action@v2
@@ -195,7 +190,7 @@ jobs:
       - macos
       - macos-arm
       - windows-cross
-    runs-on: macos-13
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
     - uses: prantlf/unshelve-changes-action@v2
